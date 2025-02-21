@@ -1,0 +1,41 @@
+﻿@model List<product>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<a asp-controller="product" asp-action="Add">Sell a new product</a>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr><th>Product</th><th>Company</th><th>Location</th><th>Seller</th><th>Price</th><th></th></tr>
+    </thead>
+    <tbody>
+        @if (Model.Count != 0)
+        {
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.productname</td>
+                    <td>@product.Company</td>
+                    <td>@product.Location</td>
+                    <td>@product.user.Username</td>
+                    <td>@product.Price$</td>
+                    <td>
+                        <a asp-controller="product" asp-action="Edit" asp-route-id="@product.productid">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-controller="product" asp-action="Delete" asp-route-id="@product.productid">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {<tr>
+                <td colspan="7" class="text-center">You have no Products.</td>
+            </tr>
+        }
+
+    </tbody>
+    
+</table>
+<a asp-controller="product" asp-action="Purchase" class="btn btn-primary" style="float:right;">Return </a>
